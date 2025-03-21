@@ -42,6 +42,7 @@ export default function RootLayout({
         <meta name="theme-color" content="#0F0F13" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="google-site-verification" content="bF2MSMeeAMcFzo8Vc4Q-_baZRLfTaYET7OdnN6aVwPU" />
         <meta
           httpEquiv="Content-Security-Policy"
           content="frame-src 'self' https://www.onlinegames.io https://*.onlinegames.io https://universal.wgplayer.com https://*.wgplayer.com;"
