@@ -2,9 +2,9 @@ import type React from "react"
 import "@/app/globals.css"
 import { Inter, Space_Grotesk } from "next/font/google"
 import { cn } from "@/lib/utils"
-import { GoogleAnalytics } from "@next/third-parties/google"
 import { GA_TRACKING_ID } from "@/lib/analytics"
 import AnalyticsProvider from "@/components/analytics-provider"
+import Script from "next/script"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -49,11 +49,21 @@ export default function RootLayout({
         <meta name="referrer" content="no-referrer-when-downgrade" />
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        
+        {/* Google Analytics */}
+        <Script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`} strategy="afterInteractive" />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_TRACKING_ID}');
+          `}
+        </Script>
       </head>
       <body className={cn("min-h-screen bg-background font-sans antialiased", inter.variable, spaceGrotesk.variable)}>
         <AnalyticsProvider />
         {children}
-        <GoogleAnalytics gaId={GA_TRACKING_ID} />
       </body>
     </html>
   )

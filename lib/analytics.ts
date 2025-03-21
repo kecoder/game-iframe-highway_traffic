@@ -1,5 +1,5 @@
 // Google Analytics 配置
-export const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_ID || 'G-XXXXXXXXXX';
+export const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_ID || 'G-7VBX9B79WH';
 
 // 发送页面浏览事件到 Google Analytics
 export const pageview = (url: string) => {
