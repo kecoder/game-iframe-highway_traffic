@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { AlertTriangle, Trophy } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { useAnalytics } from "@/hooks/use-analytics"
 
 // Inspirational quotes list
 const inspirationalQuotes = [
@@ -111,6 +112,9 @@ export default function Sidebar() {
   // Randomly select an inspirational quote
   const [inspirationalQuote, setInspirationalQuote] = useState("");
   
+  // 使用分析钩子
+  const { trackButtonClick } = useAnalytics();
+  
   useEffect(() => {
     // Randomly select a quote
     const randomIndex = Math.floor(Math.random() * inspirationalQuotes.length);
@@ -119,6 +123,9 @@ export default function Sidebar() {
   
   // Restart game function
   const restartGame = () => {
+    // 跟踪重启游戏事件
+    trackButtonClick('restart_game');
+    
     // Get game iframe and reload it
     const gameIframe = document.querySelector('iframe');
     

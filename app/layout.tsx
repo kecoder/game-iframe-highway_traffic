@@ -2,6 +2,9 @@ import type React from "react"
 import "@/app/globals.css"
 import { Inter, Space_Grotesk } from "next/font/google"
 import { cn } from "@/lib/utils"
+import { GoogleAnalytics } from "@next/third-parties/google"
+import { GA_TRACKING_ID } from "@/lib/analytics"
+import AnalyticsProvider from "@/components/analytics-provider"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -48,7 +51,9 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       </head>
       <body className={cn("min-h-screen bg-background font-sans antialiased", inter.variable, spaceGrotesk.variable)}>
+        <AnalyticsProvider />
         {children}
+        <GoogleAnalytics gaId={GA_TRACKING_ID} />
       </body>
     </html>
   )

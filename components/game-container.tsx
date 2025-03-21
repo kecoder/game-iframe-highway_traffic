@@ -4,16 +4,22 @@ import { useEffect, useState } from "react"
 import { cn } from "@/lib/utils"
 import { AlertTriangle } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { useAnalytics } from "@/hooks/use-analytics"
 
 export default function GameContainer() {
   const [isLoading, setIsLoading] = useState(true)
   const [iframeLoaded, setIframeLoaded] = useState(false)
   const [loadError, setLoadError] = useState(false)
+  
+  // 使用分析钩子
+  const { trackGameStart, trackGameEnd, trackButtonClick } = useAnalytics()
 
   // Handle iframe load event
   const handleIframeLoad = () => {
     setIframeLoaded(true)
     setIsLoading(false)
+    // 跟踪游戏加载完成事件
+    trackGameStart()
   }
 
   // Handle iframe error event
@@ -70,7 +76,10 @@ export default function GameContainer() {
             <Button 
               variant="outline" 
               className="border-[#00F3FF] text-[#00F3FF] hover:bg-[#00F3FF]/10"
-              onClick={() => window.location.reload()}
+              onClick={() => {
+                trackButtonClick('retry_game')
+                window.location.reload()
+              }}
             >
               Retry
             </Button>
