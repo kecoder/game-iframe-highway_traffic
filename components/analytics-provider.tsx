@@ -1,10 +1,11 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, Suspense } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { pageview } from '@/lib/analytics';
 
-export default function AnalyticsProvider() {
+// 内部组件，使用 useSearchParams
+function AnalyticsTracker() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -21,5 +22,14 @@ export default function AnalyticsProvider() {
     }
   }, [pathname, searchParams]);
 
-  return null; // 这个组件不渲染任何内容
+  return null;
+}
+
+// 主组件，使用 Suspense 包裹
+export default function AnalyticsProvider() {
+  return (
+    <Suspense fallback={null}>
+      <AnalyticsTracker />
+    </Suspense>
+  );
 }
